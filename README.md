@@ -1,15 +1,17 @@
 # k8s_tips 
 
 ## Access kube-api via curl 
-https://kubernetes.io/docs/tasks/administer-cluster/access-cluster-api/
+[Reference Link](https://kubernetes.io/docs/tasks/administer-cluster/access-cluster-api/)
 
+```bash
 kubectl proxy --port=8080 &
 curl http://localhost:8080/api/
-
+```
 ## Delete a namespace Stuck in Terminating State 
 
-https://www.redhat.com/sysadmin/troubleshooting-terminating-namespaces
+[Reference Link](https://www.redhat.com/sysadmin/troubleshooting-terminating-namespaces)
 
+```bash
 NAMESPACE=dev-ns
 kubectl get namespace ${NAMESPACE} -o json > tmp.json
 
@@ -30,6 +32,6 @@ remove  "kubernetes" from above
 
 
 curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http://127.0.0.1:8080/api/v1/namespaces/${NAMESPACE}/finalize
-
+```
 ## Delete PODs Stuck in Terminating State 
-https://lepczynski.it/en/k8s_en/k8s-pods-stuck-on-terminating/
+[Reference Link](https://lepczynski.it/en/k8s_en/k8s-pods-stuck-on-terminating/)
