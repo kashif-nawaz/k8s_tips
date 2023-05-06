@@ -35,3 +35,13 @@ curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http:
 ```
 ## Delete PODs Stuck in Terminating State 
 [Reference Link](https://lepczynski.it/en/k8s_en/k8s-pods-stuck-on-terminating/)
+
+```bash
+namespace="enter_the_name"
+
+delpods=$(kubectl get pods -n ${namespace} | grep -i 'Terminating' | awk '{print $1 }')
+
+for i in ${delpods[@]}; do
+  kubectl delete pod $i --force=true --wait=false --grace-period=0  -n ${namespace}
+done
+```
